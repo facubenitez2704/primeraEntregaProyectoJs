@@ -1,9 +1,9 @@
 // una bienvenida al usuario
-
+/*
 let bienvenida = prompt ("Bienvenidx!! cual es tu nombre?");
 alert ("Exelente, un placer" + " " +  bienvenida);
 alert ("Te deseamos una exelente experiencia!");
-
+*/
 //descripcion de productos disponibles tipo base de datos 
 
 const guitarraGibson ={ codigo: 3445, modelo: "semihollow 335", color: "negra", año: 1997, origen: "usa", precio: "5000 usd", stock:2};
@@ -75,7 +75,45 @@ else{
 }
 stockP(1, guitarraGibson);
 stockP(3, guitarraFender);
-stockP(1, amplificador);
+stockP(1, amplificador); 
+
+//dom
+let prueba= document.all;
+console.log(prueba)
+prueba=document.querySelector("header");
+console.log(prueba);
+
+//vamos a cambiar el titulo
+
+const tituloNuevo=document.querySelector("h1").textContent="BEFA MUSIC";
+console.log(tituloNuevo);
+//vamos a remover alguna etiqueta
+const borrarSub=document.querySelector("h2");
+borrarSub.remove();
+console.log(borrarSub);
+//vamos a agregar algun parrafo
+let agregado=document.createElement("p")
+agregado.innerHTML="<h3>Bienvenido a nuestra tienda virtual de instrumentos musicales para el guitarrista</h3>";
+const pAgregado=document.querySelector("header");
+console.log(pAgregado.children);
+pAgregado.insertBefore(agregado,pAgregado.children[2]);
+console.log(agregado);
+//vamos a crear un array en forma de lista tipo li en productos
+let arrayPadre=document.getElementById("divVacio");
+let arrayAgregado=["guitarra fender","guitarra gibson","amplificador mesa boogie","reverb big sky","delay timeline"];
+for (const arrayNuevo of arrayAgregado){
+    let li=document.createElement("li");
+    li.innerHTML=arrayAgregado;
+    arrayPadre.appendChild(li);
+}
+//vamos a agregar el array de obejetos que tnemos a la seccion productos desde dom
+let section=document.getElementById("sectionVacio");
+for (const sectionA of arrayProductosDatos){
+    let liDos=document.createElement("li");
+    liDos.innerHTML=arrayProductosDatos;
+    section.appendChild(liDos);
+console.log(section);
+}
 
 
 
