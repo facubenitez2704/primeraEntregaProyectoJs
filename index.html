@@ -24,20 +24,28 @@
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="pages/productos.html">Productos</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categorias
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Guitarras</a></li>
-              <li><a class="dropdown-item" href="#">Amplificadores y gabinetes</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Pedales</a></li>
-              <li><a class="dropdown-item" href="#">Accesorios</a></li>
-            </ul>
-          </li>
+                    <a class="nav-link active" aria-current="page" href="pages/productos.html">Productos</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Categorias
+                    </a>
+                    <ul class="dropdown-menu" id="menuP">
+                      <li>
+                        <a class="dropdown-item" onclick="filtrarPorCategoria(`guitarra`)"> Guitarras </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" onclick="filtrarPorCategoria(`amplificadores`)"> Amplificadores y gabinetes </a>
+                      <li>
+                        <hr class="dropdown-divider"></li>
+                      <li>
+                        <a class="dropdown-item" onclick="filtrarPorCategoria(`pedales`)"> Pedales </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" onclick="filtrarPorCategoria(`accesorios`)"> Accesorios </a>
+                      </li>
+                    </ul>
+                  </li>
           <li class="nav-item">
             <a class="nav-link disabled">Link</a>
           </li>
@@ -51,7 +59,12 @@
   </nav>
   <nav class= "colorNav" class="navbar bg-light" >
     <form class="container-fluid justify-content-start">
-      <button class="btn btn-outline-success me-2" type="button">Carrito</button>
+      <button class="btn btn-outline-success me-2 position-relative"  type="button">Carrito
+        <span id="buttonCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          0
+          <span class="visually-hidden">FacuBenitez</span>
+        </span>
+      </button>
       <button class="btn btn-sm btn-outline-secondary" type="button">Favoritos</button>
     </form>
   </nav>
@@ -69,7 +82,7 @@
   </div>
   <div class="carousel-inner">
     <div  class="carousel-item active" >
-      <img class="imgUno" src="img/Fender Custom Shop  _ The Music Zoo.jpg" class="d-block w-100"   alt="foto guitarra fender custom shop" >
+      <img class="imgUno" src="img/Fendercustom.jpg" class="d-block w-100"   alt="foto guitarra fender custom shop" >
     </div>
     <div class="carousel-item">
       <img class=imgDos src="img/Used Electric Guitars _ The Music Emporium.jpg" class="d-block w-75" alt="guitarra gretsch custom shop">

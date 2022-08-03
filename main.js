@@ -77,6 +77,17 @@ stockP(1, guitarraGibson);
 stockP(3, guitarraFender);
 stockP(1, amplificador); 
 
+
+
+
+
+
+
+
+
+
+
+
 //dom
 let prueba= document.all;
 console.log(prueba)
@@ -91,13 +102,18 @@ console.log(tituloNuevo);
 const borrarSub=document.querySelector("h2");
 borrarSub.remove();
 console.log(borrarSub);
+
+
+
 //vamos a agregar algun parrafo
+
 let agregado=document.createElement("p")
 agregado.innerHTML="<h3>Bienvenido a nuestra tienda virtual de instrumentos musicales para el guitarrista</h3>";
 const pAgregado=document.querySelector("header");
 console.log(pAgregado.children);
 pAgregado.insertBefore(agregado,pAgregado.children[2]);
 console.log(agregado);
+/*
 //vamos a crear un array en forma de lista tipo li en productos
 let arrayPadre=document.getElementById("divVacio");
 let arrayAgregado=["guitarra fender","guitarra gibson","amplificador mesa boogie","reverb big sky","delay timeline"];
@@ -114,6 +130,88 @@ for (const sectionA of arrayProductosDatos){
     section.appendChild(liDos);
 console.log(section);
 }
+*/
 
 
+
+
+
+//eventos
+//card
+
+
+const productos = [
+     { codigo: 3445, nombre:"guitarraGibson", modelo: "semihollow 335", color: "negra", año: 1997, origen: "usa", precio: "5000 usd", stock:2, img: src="../img/descarga.png",category:"guitarra" },
+
+     { codigo: 3446, nombre:"guitarraFender", modelo: "stratocaster custom shop", color: "azul oceano", año: 1989, origen: "usa", precio:"4700 usd", stock:1, img: src="../img/Fendercustom.jpg", category:"guitarra"},
+
+     { codigo: 4567, nombre:"pedalReverb", marca:"strymon", modelo:"reverb big sky", efecto: "reverb", origen: "usa", precio:"450 usd", stock:3, img: "https://eddiesguitars.com/media/catalog/product/cache/1/thumbnail/1200x/17f82f742ffe127f42dca9de82fb58b1/i/m/img_6699.jpg",category:"pedales"},
+
+    { codigo: 4568, nombre:"pedalDelay", marca:"strymon", modelo:"timeline", efecto:"delay", origen: "usa", precio:"400 usd", stock: 3, img:"https://www.heavenimagenes.com/heavencommerce/bf05a8b6-ecb8-4713-82f8-c2ad017db15b/images/v2/STRYMON/1602241527296032_01_medium.jpg",category:"pedales"},
+
+    { codigo: 5678, nombre:"cables" , modelo:"flex", marca:"fender", color: "azul", origen: "usa", precio:"50 usd", stock: 2, img:"https://www.homemusic.pe/files/productos/20191231150430.jpg",category:"accesorios"},
+
+   { codigo: 6666,  nombre:"amplificador" , modelo: "mark five", marca: "mesa boogie", potencia: "25w", origen: "usa", precio: "2000 usd", stock:1, img:"https://guitars.azureedge.net/aza/user/gear/mesa-1-006.jpg?maxwidth=500",category:"amplificadores"},
+
+
+];
+
+const carrito= JSON.parse(localStorage.getItem("carrito")) ?? [];
+document.getElementById("buttonCarrito").innerHTML = carrito.length;
+
+productos.forEach((producto) => {
+    const idButton = `add-cart${producto.codigo}`
+    document.getElementById("sectionVacio").innerHTML += `<div class="card" style="width: 18rem">
+    <div class="precio">
+    <p>${producto.precio}</p>
+    </div>
+    <img src="${producto.img}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${producto.nombre}</h5>
+      <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
+    </div>
+  </div>`
+})
+productos.forEach((producto) => {
+    const idButton = `add-cart${producto.codigo}`
+    document.getElementById(idButton).onclick = () => {
+        carrito.push(producto);
+        document.getElementById("buttonCarrito").innerHTML = carrito.length
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        console.log(carrito)
+    }
+});
+
+
+
+
+
+// vamos a generar las categorias implicandoles un evento
+
+function filtrarPorCategoria(categoria){
+    document.getElementById("sectionVacio").innerHTML = "";
+    const productosFiltrados = productos.filter((producto) => producto.category === categoria);
+
+productosFiltrados.forEach((producto) => {
+    const idButton = `add-cart${producto.codigo}`
+    document.getElementById("sectionVacio").innerHTML += `<div class="card" style="width: 18rem">
+    <div class="precio">
+    <p>${producto.precio}</p>
+    </div>
+    <img src="${producto.img}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${producto.nombre}</h5>
+      <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
+    </div>
+  </div>`
+})}
+
+console.log(document.getElementsByClassName("filtrar-categoria"));
+
+for(const nodoHtml of document.getElementsByClassName("filtrar-categoria")){
+    nodoHtml.onclick =(event) => {
+        const categoria = event.target.getAttribute("data-categoria")
+        filtrarPorCategoria(categoria)
+    }
+}
 

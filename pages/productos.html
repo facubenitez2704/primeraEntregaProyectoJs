@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../CSS/main.css">
      
 </head>
-<body>
+<body class="colorMenuP">
     <header>
         <h1>
             BEFA Music
@@ -31,12 +31,20 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Categorias
                     </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Guitarras</a></li>
-                      <li><a class="dropdown-item" href="#">Amplificadores y gabinetes</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Pedales</a></li>
-                      <li><a class="dropdown-item" href="#">Accesorios</a></li>
+                    <ul class="dropdown-menu" id="menuP">
+                      <li>
+                        <a class="dropdown-item filtrar-categoria" data-categoria="guitarra" > Guitarras </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item filtrar-categoria" data-categoria="amplificadores"> Amplificadores y gabinetes </a>
+                      <li>
+                        <hr class="dropdown-divider"></li>
+                      <li>
+                        <a class="dropdown-item filtrar-categoria" data-categoria="pedales" > Pedales </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item filtrar-categoria" data-categoria="accesorios" > Accesorios </a>
+                      </li>
                     </ul>
                   </li>
                   <li class="nav-item">
@@ -52,21 +60,30 @@
           </nav>
           <nav class= "colorNav" class="navbar bg-light" >
             <form class="container-fluid justify-content-start">
-              <button class="btn btn-outline-success me-2" type="button">Carrito</button>
-              <button class="btn btn-sm btn-outline-secondary" type="button">Favoritos</button>
+              <button class="btn btn-outline-success me-2 position-relative" type="button">Carrito
+                <span   id="buttonCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                  0
+                  <span class="visually-hidden">FacuBenitez</span>
+                </span>
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" onclick="filtrarPorCategoria(guitarra)" type="button">Favoritos</button>
             </form>
           </nav>
         
     </header>
     <main>
+   
         <h2>
             Productos
         </h2>
         <DIV id="divVacio">
 
         </DIV>
-       <section id="sectionVacio">
+       <section id="sectionVacio" >
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
 
+   
        </section>
     </main>
     <footer>
