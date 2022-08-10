@@ -6,12 +6,12 @@ alert ("Te deseamos una exelente experiencia!");
 */
 //descripcion de productos disponibles tipo base de datos 
 
-const guitarraGibson ={ codigo: 3445, modelo: "semihollow 335", color: "negra", año: 1997, origen: "usa", precio: "5000 usd", stock:2};
-const guitarraFender ={ codigo: 3446, modelo: "stratocaster custom shop", color: "azul oceano", año: 1989, origen: "usa", precio:"4700 usd", stock:1};
-const pedalReverb= { codigo: 4567, marca: "strymon", modelo: "reverb big sky", efecto: "reverb", origen: "usa", precio:"450 usd", stock:3};
-const pedalDelay={ codigo: 4568, marca:"strymon", modelo: "timeline", efecto: "delay", origen: "usa", precio:"400 usd", stock: 3};
-const cables={ codigo: 5678, modelo: "flex", marca:"fender", color: "azul", origen: "usa", precio:"50 usd", stock: 2};
-const amplificador={ codigo: 6666, modelo: "mark five", marca: "mesa boogie", potenica: "25w", origen: "usa", precio: "2000 usd", stock:1};
+const guitarraGibson ={ codigo: 3445, modelo: "semihollow 335", color: "negra", año: 1997, origen: "usa", precio: "5000 usd", stock:2, tipe: "guitarra"};
+const guitarraFender ={ codigo: 3446, modelo: "stratocaster custom shop", color: "azul oceano", año: 1989, origen: "usa", precio:"4700 usd", stock:1, tipe: "guitarra"};
+const pedalReverb= { codigo: 4567, marca: "strymon", modelo: "reverb big sky", efecto: "reverb", origen: "usa", precio:"450 usd", stock:3,tipe: "pedal"};
+const pedalDelay={ codigo: 4568, marca:"strymon", modelo: "timeline", efecto: "delay", origen: "usa", precio:"400 usd", stock: 3, tipe: "pedal"};
+const cables={ codigo: 5678, modelo: "flex", marca:"fender", color: "azul", origen: "usa", precio:"50 usd", stock: 2, tipe: "cable"};
+const amplificador={ codigo: 6666, modelo: "mark five", marca: "mesa boogie", potenica: "25w", origen: "usa", precio: "2000 usd", stock:1, tipe: "amplificador"};
 
 const arrayProductosDatos=[guitarraGibson, guitarraFender, pedalReverb, pedalDelay, cables, amplificador]
 console.log(arrayProductosDatos);
@@ -159,9 +159,16 @@ const productos = [
 const carrito= JSON.parse(localStorage.getItem("carrito")) ?? [];
 document.getElementById("buttonCarrito").innerHTML = carrito.length;
 
+
+
+
+
+
 productos.forEach((producto) => {
     const idButton = `add-cart${producto.codigo}`
-    document.getElementById("sectionVacio").innerHTML += `<div class="card" style="width: 18rem">
+    const idButtonDos = `add-cart${producto.codigo}`
+    document.getElementById("sectionVacio").innerHTML += ` 
+     <div class="card" style="width: 20rem">
     <div class="precio">
     <p>${producto.precio}</p>
     </div>
@@ -169,6 +176,9 @@ productos.forEach((producto) => {
     <div class="card-body">
       <h5 class="card-title">${producto.nombre}</h5>
       <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
+      <a   class="btn btn-primary " id=${idButtonDos} >Favoritos</a>
+      <a  class="btn btn-primary"  onclick = "verProductos(${producto.codigo})">Ver Prodcuto</a>
+      
     </div>
   </div>`
 })
@@ -183,6 +193,44 @@ productos.forEach((producto) => {
 });
 
 
+// ver productos
+function verProductos(codigo){
+    const favoritosProductos = productos.findIndex((producto) => carrito.length === codigo);
+    localStorage.setItem(`verProductos`, JSON.stringify(productos[favoritosProductos]));
+    location.href = "caracteristicas.html";
+}
+
+/*ver carrito
+
+    document.getElementById(buttonCarrito).onclick =() => {
+    localStorage.setItem(`verCarrito`, JSON.stringify(carrito));
+    location.href = "carrito.html";
+}
+*/
+//favoritos
+/*
+
+
+
+function favoritosPr()*/
+
+const favoritos = JSON.parse(localStorage.getItem("favoritos")) ?? [];
+document.getElementById("buttonFavoritos").innerHTML = favoritos.length;
+
+productos.forEach((productoF) => {
+    const idButtonDos = `add-cart${productoF.codigo}`
+    document.getElementById(idButtonDos).onclick = () => {
+        favoritos.push(productoF);
+        document.getElementById("buttonFavoritos").innerHTML = favoritos.length
+        localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        console.log(favoritos)
+    }
+});
+
+
+
+
+
 
 
 
@@ -194,7 +242,7 @@ function filtrarPorCategoria(categoria){
 
 productosFiltrados.forEach((producto) => {
     const idButton = `add-cart${producto.codigo}`
-    document.getElementById("sectionVacio").innerHTML += `<div class="card" style="width: 18rem">
+    document.getElementById("sectionVacio").innerHTML += `  <div class="card" style="width: 20rem">
     <div class="precio">
     <p>${producto.precio}</p>
     </div>
@@ -215,3 +263,35 @@ for(const nodoHtml of document.getElementsByClassName("filtrar-categoria")){
     }
 }
 
+
+
+/*filtor pra buscar producto.
+
+
+function buscarProducto(categoria){
+    document.getElementById("btnBuscar").innerHTML = "";
+    const productosBuscados = productos.find((producto) => producto.codigo == "btnInput");
+
+productosBuscados.forEach((producto) => {
+    const idButton = `add-cart${producto.codigo}`
+    document.getElementById("sectionVacio").innerHTML += `  <div class="card" style="width: 20rem">
+    <div class="precio">
+    <p>${producto.precio}</p>
+    </div>
+    <img src="${producto.img}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${producto.nombre}</h5>
+      <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
+    </div>
+  </div>`
+})}
+
+console.log(document.getElementsByClassName("btnBuscar"));
+buscarProducto(cables)
+
+
+    document.getElementById(btnBuscar).onclick =() => {productos.find((producto) => producto.codigo === 3445);
+        
+    }
+    console.log(btnBuscar)
+    */

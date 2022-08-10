@@ -52,21 +52,25 @@
                   </li>
                 </ul>
                 <form class="d-flex" role="search" >
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Buscar</button>
+                  <input  class="form-control me-2 " type="search " placeholder="Search " aria-label="Search btnInput">
+                  <button id="btnBuscar" class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
               </div>
             </div>
           </nav>
           <nav class= "colorNav" class="navbar bg-light" >
             <form class="container-fluid justify-content-start">
-              <button class="btn btn-outline-success me-2 position-relative" type="button">Carrito
+              <button class="btn btn-outline-success me-2 position-relative filtrar-carrito" type="button" id="carritoCarrito">Carrito
                 <span   id="buttonCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
                   0
                   <span class="visually-hidden">FacuBenitez</span>
                 </span>
               </button>
-              <button class="btn btn-sm btn-outline-secondary" onclick="filtrarPorCategoria(guitarra)" type="button">Favoritos</button>
+              <button class="btn btn-outline-success me-2 position-relative" type="button">Favoritos
+                <span   id="buttonFavoritos" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                  0
+                </span>
+              </button>
             </form>
           </nav>
         
@@ -79,9 +83,9 @@
         <DIV id="divVacio">
 
         </DIV>
-       <section id="sectionVacio" >
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
+       <section  id="sectionVacio" class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
 
    
        </section>

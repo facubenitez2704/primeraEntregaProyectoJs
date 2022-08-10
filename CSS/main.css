@@ -106,3 +106,48 @@ footer ul li{
 .colorMenuP{
     background-image: linear-gradient(to left, #0a0a11 ,#0e1349);
 }
+ /*caracteristicas*/
+ .colorMenuC{
+    background-image: linear-gradient(to left, #0a0a11 ,#0e1349);
+ }
+
+ .titleC{
+    color: rgb(233, 207, 207);
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 1.5rem;
+ }
+ .modelC{
+    color: rgb(233, 207, 207);
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 1.5rem;
+ }
+ .precioC{
+    color: rgb(233, 207, 207);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 1.5rem;
+ }
+ .colorC{
+    color: rgb(233, 207, 207);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 1.5rem;
+ }
+ .imgC{
+    color: rgb(233, 207, 207);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 1.5rem;
+ }

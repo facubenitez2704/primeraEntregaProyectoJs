@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductosData</title>
+         <!--link de boostrap-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<!--LINK DE CSS-->
+<link rel="stylesheet" href="../CSS/main.css">
+     
+</head>
+<body class="colorMenuC">
+    <header>
+    <h1>
+        BEFA Music
+    </h1>
+    <nav   class="navbar navbar-expand-lg bg-light">
+        <div  class="container-fluid" >
+          <a class="navbar-brand" href="../index.html">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="pages/productos.html">Productos</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Categorias 
+                </a> 
+                <ul class="dropdown-menu" id="menuP">
+                  <li>
+                    <a class="dropdown-item filtrar-categoria" data-categoria="guitarra" > Guitarras </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item filtrar-categoria" data-categoria="amplificadores"> Amplificadores y gabinetes </a>
+                  <li>
+                    <hr class="dropdown-divider"></li>
+                  <li>
+                    <a class="dropdown-item filtrar-categoria" data-categoria="pedales" > Pedales </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item filtrar-categoria" data-categoria="accesorios" > Accesorios </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Link</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search" >
+              <input  class="form-control me-2 " type="search " placeholder="Search " aria-label="Search btnInput">
+              <button id="btnBuscar" class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <nav class= "colorNav" class="navbar bg-light" >
+        <form class="container-fluid justify-content-start">
+          <button class="btn btn-outline-success me-2 position-relative " type="button" data-carrito="carrito">Carrito
+            <span   id="buttonCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+              0
+              <span class="visually-hidden">FacuBenitez</span>
+            </span>
+          </button>
+          <button class="btn btn-outline-success me-2 position-relative" type="button">Favoritos
+            <span   id="buttonFavoritos" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+              0
+            </span>
+          </button>
+        </form>
+      </nav>
+    
+</header>
+<main>
+    <h2 id="tituloProducto" class="titleC">
+        hola soy el maiiiin
+    </h2>
+    <p id="modeloProducto" class="modelC">
+        
+    </p>
+    <p id="precioProducto" class="precioC">
+
+    </p>
+    <p id="colorProducto" class="colorC">
+
+    </p>
+    <div id="imagenProducto" class="imgC">
+        <img src="" alt="" id="imagenProducto">
+    </div>
+</main>
+<footer>
+    <h3>
+        Derechos de Autor
+    </h3>
+    <h4>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti tenetur possimus ad cum asperiores beatae molestias vitae suscipit cumque explicabo at odit officia voluptates nesciunt rem, rerum fuga placeat provident.
+    </h4>
+    <h5>
+         Redes Sociales
+     </h5>
+
+    <ul>
+        <li> <a href="https://instagram.com/halosbanda?utm_medium=copy_link" target="_blank">
+            instagram
+        </a> 
+        </li>
+        <li> facebook </li>
+        <li> mail </li>
+        <li> twiter</li>
+        <li> you tube</li>
+        <li> spotify</li>
+
+    </ul>
+
+
+</footer>
+<script>
+    const caracteristicas = JSON.parse(localStorage.getItem(`verProductos`))
+    console.log(caracteristicas);
+    document.getElementById("tituloProducto").innerHTML = caracteristicas.nombre;
+    document.getElementById("modeloProducto").innerHTML = caracteristicas.modelo;
+    document.getElementById("precioProducto").innerHTML = caracteristicas.precio;
+    document.getElementById("colorProducto").innerHTML = caracteristicas.color;
+    document.getElementById("imagenProducto").innerHTML = caracteristicas.img;
+</script>
+
+</body>
+</html>
