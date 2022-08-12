@@ -14,15 +14,44 @@ const cables={ codigo: 5678, modelo: "flex", marca:"fender", color: "azul", orig
 const amplificador={ codigo: 6666, modelo: "mark five", marca: "mesa boogie", potenica: "25w", origen: "usa", precio: "2000 usd", stock:1, tipe: "amplificador"};
 
 const arrayProductosDatos=[guitarraGibson, guitarraFender, pedalReverb, pedalDelay, cables, amplificador]
+//practicando acceso condicional a un objeto
 console.log(arrayProductosDatos);
+console.log(guitarraGibson?.codigo || "la propiedad no existe");
+console.log(guitarraFender?.potencia || "la propiedad no existe");
+//desestructuracion
+const{modelo, precio} =guitarraGibson
+const{marca, precio:valor} = pedalDelay  //le agregue un alias a precio
+
+console.log(modelo);
+console.log(marca);
+console.log(valor);
+
+//spread de objetos
+const guitarraGibsonLesPaul={
+    ...guitarraGibson,
+    codigo:3443,
+    modelo: "les paul",
+    precio: "3500 usd",
+}
+console.log(guitarraGibsonLesPaul);
 
 
 //prodcutos disponibles para el usuario
-
 const productosUsuario=["guitarra gibson 335", "guitarra fender custom shop "," reverb big sky","delay time line", "cable fender", "amplificador mesa boogie" ];
 
-//se los mostramos para que seleccione.
+//desestructuracion de array
+const [a, b, c] = productosUsuario;
+console.log(a);
+console.log(b);
+console.log(c);
 
+const desestructuracion = [...productosUsuario];
+console.log(desestructuracion);
+
+
+
+
+//se los mostramos para que seleccione.
 for (let i = 0; i < productosUsuario.length; i++)
 alert(productosUsuario[i] + " " + "disponible");
 alert( guitarraGibson,guitarraFender,pedalDelay,pedalReverb,cables,amplificador);
@@ -30,6 +59,20 @@ let eleccionUsuarioFicticia = prompt("que queres comprar de los productos dispon
 console.log("selecciono" + eleccionUsuarioFicticia);
 alert("exelente elegiste" + " " + eleccionUsuarioFicticia);
 //se agrega al carrito
+
+
+
+
+//operador ternario
+function usuarioEleccion(){
+    eleccionUsuarioFicticia != "" ?  agregarAlCarrito(eleccionUsuarioFicticia) : alert("bueno muchas gracias de todas formas!")
+    console.log(eleccionUsuarioFicticia);
+    }
+    function agregarAlCarrito(seleccion){
+        console.log("se agrego al carrito" + seleccion)
+    
+    }
+/*
 function usuarioEleccion(){
     if( eleccionUsuarioFicticia != ""){
 agregarAlCarrito(eleccionUsuarioFicticia)
@@ -42,41 +85,52 @@ function agregarAlCarrito(seleccion){
     console.log("se agrego al carrito" + seleccion)
 
 }
+*/
+
+
+
+
+
 
 usuarioEleccion();
 
 //descontamos del stock,vamos a borrar el elemnto seleccionado de array de datos.
 // supongamos que el usuario compro cables, vamos a sacarlos del stock.
-
 function borrarDelStock(borrar){
     const index = arrayProductosDatos.findIndex((arrayProductosDatos) => arrayProductosDatos === borrar);
     arrayProductosDatos.splice(index,1);
     console.log(arrayProductosDatos);
-
-
 }
 borrarDelStock(cables);
 //agregamos otro elemento nuevo al stock
-
 const teclado ={ codigo: 7878, modelo: "micro korg", marca: "korg", origen: "china", precio: "600 usd"};
 arrayProductosDatos.unshift(teclado);
 console.log(arrayProductosDatos.length);
 
-// cree una funcion paara verificar el stock con la base de datos interna imporvisada que arme con los objetos.
 
+
+
+
+
+// cree una funcion paara verificar el stock con la base de datos interna imporvisada que arme con los objetos.
+/*
 function stockP(cantidad, dato){
     if( cantidad <= dato.stock){
         console.log("hay stock")
     }
 else{ 
     console.log("no hay mas stock");
+}}
+*/ //operador ternario
+function stockP(cantidad, dato){
+    cantidad <= dato.stock ? console.log("hay stock") : console.log("no hay mas stock");
 }
 
-}
 stockP(1, guitarraGibson);
 stockP(3, guitarraFender);
 stockP(1, amplificador); 
-
+stockP(5, pedalDelay);
+stockP(10, pedalReverb);
 
 
 
@@ -156,13 +210,9 @@ const productos = [
 
 ];
 
+
 const carrito= JSON.parse(localStorage.getItem("carrito")) ?? [];
 document.getElementById("buttonCarrito").innerHTML = carrito.length;
-
-
-
-
-
 
 productos.forEach((producto) => {
     const idButton = `add-cart${producto.codigo}`
@@ -295,3 +345,4 @@ buscarProducto(cables)
     }
     console.log(btnBuscar)
     */
+
