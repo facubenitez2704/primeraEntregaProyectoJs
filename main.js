@@ -1,10 +1,46 @@
 // una bienvenida al usuario
-/*
-let bienvenida = prompt ("Bienvenidx!! cual es tu nombre?");
-alert ("Exelente, un placer" + " " +  bienvenida);
-alert ("Te deseamos una exelente experiencia!");
-*/
 //descripcion de productos disponibles tipo base de datos 
+
+
+
+
+
+
+
+Swal.fire ({
+    title: 'BIENVENIDX, CUAL ES TU NOMBRE?',
+    input: 'text',
+    inputAttributes: {
+      autocapitalize: 'off'},
+    showCancelButton: true,
+    confirmButtonText: 'Enviar',
+    showLoaderOnConfirm: true,
+    preConfirm: (login) => {
+      return fetch(`//api.github.com/users/${login}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText)
+          }
+          return response.json()
+        })
+        .catch(error => {
+          Swal.showValidationMessage(
+            `Request failed: ${error}`
+          )
+        })
+    },
+    allowOutsideClick: () => !Swal.isLoading()
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: `${result.value.login}'s avatar`,
+        imageUrl: result.value.avatar_url ="../img/pngeggslash.png"
+      })
+    }
+  });
+  
+
+
 
 const guitarraGibson ={ codigo: 3445, modelo: "semihollow 335", color: "negra", año: 1997, origen: "usa", precio: "5000 usd", stock:2, tipe: "guitarra"};
 const guitarraFender ={ codigo: 3446, modelo: "stratocaster custom shop", color: "azul oceano", año: 1989, origen: "usa", precio:"4700 usd", stock:1, tipe: "guitarra"};
@@ -53,11 +89,59 @@ console.log(desestructuracion);
 
 //se los mostramos para que seleccione.
 for (let i = 0; i < productosUsuario.length; i++)
-alert(productosUsuario[i] + " " + "disponible");
-alert( guitarraGibson,guitarraFender,pedalDelay,pedalReverb,cables,amplificador);
-let eleccionUsuarioFicticia = prompt("que queres comprar de los productos disponibles?");
+console.log(productosUsuario[i] + " " + "disponible");
+let eleccionUsuarioFicticia = "guitarra"
+// alert 2
+   Swal.fire ({
+    title: 'que estas buscando?',
+    input: 'text',
+    inputAttributes: {
+      autocapitalize: 'off'},
+    showCancelButton: true,
+    confirmButtonText: 'Enviar',
+    showLoaderOnConfirm: true,
+    preConfirm: (login) => {
+      return fetch(`//api.github.com/users/${login}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText)
+          }
+          return response.json()
+        })
+        .catch(error => {
+          Swal.showValidationMessage(
+            `Request failed: ${error}`
+          )
+        })
+    },
+    allowOutsideClick: () => !Swal.isLoading()
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: `${result.value.login}'exelente aqui encotraras todo lo que buscas!`,
+      })
+    }
+  });
+  
 console.log("selecciono" + eleccionUsuarioFicticia);
-alert("exelente elegiste" + " " + eleccionUsuarioFicticia);
+
+
+// alert 3
+
+Swal.fire({
+    title: "exelente elegiste" + " " + eleccionUsuarioFicticia,
+    width: 600,
+    padding: '5rem',
+    color: '#3606a9',
+    background: '#fff url("../img/gui.png.png")',
+    backdrop: `
+    rgba(0,0,123,0.4)
+    url("../img/pngeggslash.png")
+    left top
+    no-repeat
+    `
+  })
+
 //se agrega al carrito
 
 
@@ -241,6 +325,25 @@ productos.forEach((producto) => {
         console.log(carrito)
     }
 });
+Toastify({
+    text: "Agregaste al carrito " + "",
+    duration: 3000,
+    destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "left", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+    onClick: function(){
+
+    }}
+  ).showToast();
+
+
+
 
 
 // ver productos
@@ -287,7 +390,7 @@ productos.forEach((productoF) => {
 // vamos a generar las categorias implicandoles un evento
 
 function filtrarPorCategoria(categoria){
-    document.getElementById("sectionVacio").innerHTML = "";
+   document.getElementById("sectionVacio").innerHTML = "";
     const productosFiltrados = productos.filter((producto) => producto.category === categoria);
 
 productosFiltrados.forEach((producto) => {
@@ -303,6 +406,7 @@ productosFiltrados.forEach((producto) => {
     </div>
   </div>`
 })}
+
 
 console.log(document.getElementsByClassName("filtrar-categoria"));
 
