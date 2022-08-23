@@ -14,6 +14,24 @@
 
      
 </head>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="carritoAcumulador">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <body class="colorMenuP">
     <header>
         <h1>
@@ -63,7 +81,7 @@
           </nav>
           <nav class= "colorNav" class="navbar bg-light" >
             <form class="container-fluid justify-content-start">
-              <button class="btn btn-outline-success me-2 position-relative filtrar-carrito" type="button" id="carritoCarrito">Carrito
+              <button class="btn btn-outline-success me-2 position-relative filtrar-carrito" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="carritoCarrito">Carrito
                 <span   id="buttonCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
                   0
                   <span class="visually-hidden">FacuBenitez</span>

@@ -2,11 +2,7 @@
 //descripcion de productos disponibles tipo base de datos 
 
 
-
-
-
-
-
+function alertUno(){
 Swal.fire ({
     title: 'BIENVENIDX, CUAL ES TU NOMBRE?',
     input: 'text',
@@ -38,7 +34,39 @@ Swal.fire ({
       })
     }
   });
-  
+}
+function alertDos(){
+Swal.fire ({
+  title: 'que estas buscando?',
+  input : 'text',
+  inputAttributes: {
+    autocapitalize: 'off'},
+  showCancelButton: true,
+  confirmButtonText: 'Enviar',
+  showLoaderOnConfirm: true,
+  preConfirm: (login) => {
+    return fetch(`//api.github.com/users/${login}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText)
+        }
+        return response.json()
+      })
+      .catch(error => {
+        Swal.showValidationMessage(
+          `Request failed: ${error}`
+        )
+      })
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: `${result.value.login}'exelente aqui encotraras todo lo que buscas!`,
+    })
+  }
+});
+}
 
 
 
@@ -90,57 +118,11 @@ console.log(desestructuracion);
 //se los mostramos para que seleccione.
 for (let i = 0; i < productosUsuario.length; i++)
 console.log(productosUsuario[i] + " " + "disponible");
-let eleccionUsuarioFicticia = "guitarra"
+let eleccionUsuarioFicticia = ""
 // alert 2
-   Swal.fire ({
-    title: 'que estas buscando?',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'},
-    showCancelButton: true,
-    confirmButtonText: 'Enviar',
-    showLoaderOnConfirm: true,
-    preConfirm: (login) => {
-      return fetch(`//api.github.com/users/${login}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(response.statusText)
-          }
-          return response.json()
-        })
-        .catch(error => {
-          Swal.showValidationMessage(
-            `Request failed: ${error}`
-          )
-        })
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: `${result.value.login}'exelente aqui encotraras todo lo que buscas!`,
-      })
-    }
-  });
-  
+
 console.log("selecciono" + eleccionUsuarioFicticia);
 
-
-// alert 3
-
-Swal.fire({
-    title: "exelente elegiste" + " " + eleccionUsuarioFicticia,
-    width: 600,
-    padding: '5rem',
-    color: '#3606a9',
-    background: '#fff url("../img/gui.png.png")',
-    backdrop: `
-    rgba(0,0,123,0.4)
-    url("../img/pngeggslash.png")
-    left top
-    no-repeat
-    `
-  })
 
 //se agrega al carrito
 
@@ -154,7 +136,7 @@ function usuarioEleccion(){
     }
     function agregarAlCarrito(seleccion){
         console.log("se agrego al carrito" + seleccion)
-    
+        
     }
 /*
 function usuarioEleccion(){
@@ -177,6 +159,8 @@ function agregarAlCarrito(seleccion){
 
 
 usuarioEleccion();
+
+
 
 //descontamos del stock,vamos a borrar el elemnto seleccionado de array de datos.
 // supongamos que el usuario compro cables, vamos a sacarlos del stock.
@@ -295,12 +279,18 @@ const productos = [
 ];
 
 
+
+
+
+
 const carrito= JSON.parse(localStorage.getItem("carrito")) ?? [];
 document.getElementById("buttonCarrito").innerHTML = carrito.length;
 
+
+
+
 productos.forEach((producto) => {
     const idButton = `add-cart${producto.codigo}`
-    const idButtonDos = `add-cart${producto.codigo}`
     document.getElementById("sectionVacio").innerHTML += ` 
      <div class="card" style="width: 20rem">
     <div class="precio">
@@ -310,21 +300,65 @@ productos.forEach((producto) => {
     <div class="card-body">
       <h5 class="card-title">${producto.nombre}</h5>
       <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
-      <a   class="btn btn-primary " id=${idButtonDos} >Favoritos</a>
       <a  class="btn btn-primary"  onclick = "verProductos(${producto.codigo})">Ver Prodcuto</a>
-      
     </div>
   </div>`
 })
+/*
+productos.forEach((producto) => {
+  const idButton = `add-cart${producto.codigo}`
+  const idButtonDos = `add-cart${producto.codigo}`
+  document.getElementById("sectionVacio").innerHTML += ` 
+   <div class="card" style="width: 20rem">
+  <div class="precio">
+  <p>${producto.precio}</p>
+  </div>
+  <img src="${producto.img}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${producto.nombre}</h5>
+    <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
+    <a   class="btn btn-primary " id=${idButtonDos} >Favoritos</a>
+    <a  class="btn btn-primary"  onclick = "verProductos(${producto.codigo})">Ver Prodcuto</a>
+    
+  </div>
+</div>`
+})
+*/
 productos.forEach((producto) => {
     const idButton = `add-cart${producto.codigo}`
     document.getElementById(idButton).onclick = () => {
+      alertTres();
         carrito.push(producto);
         document.getElementById("buttonCarrito").innerHTML = carrito.length
         localStorage.setItem("carrito", JSON.stringify(carrito));
         console.log(carrito)
+        
     }
 });
+
+
+productos.forEach((producto) => {
+  const idButton = `add-cart${producto.codigo}`
+  document.getElementById("carritoAcumulador").innerHTML += ` 
+   <div class="card" style="width: 20rem">
+  <div class="precio">
+  <p>${producto.precio}</p>
+  </div>
+  <img src="${producto.img}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${producto.nombre}</h5>
+    <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
+    <a  class="btn btn-primary"  onclick = "verProductos(${producto.codigo})">Ver Prodcuto</a>
+  </div>
+</div>`
+})
+
+
+
+
+
+
+
 Toastify({
     text: "Agregaste al carrito " + "",
     duration: 3000,
@@ -343,29 +377,40 @@ Toastify({
   ).showToast();
 
 
-
+// alert 3
+function alertTres(){
+  Swal.fire({
+      title: "exelente elegiste" + " " + productos.nombre,
+      width: 600,
+      padding: '5rem',
+      color: '#3606a9',
+      background: '#fff url("../img/gui.png.png")',
+      backdrop: `
+      rgba(0,0,123,0.4)
+      url("../img/pngeggslash.png")
+      left top
+      no-repeat
+      `
+    })
+  }
+  
 
 
 // ver productos
 function verProductos(codigo){
-    const favoritosProductos = productos.findIndex((producto) => carrito.length === codigo);
+  
+    const favoritosProductos = productos.findIndex((producto) => producto.codigo === codigo);
     localStorage.setItem(`verProductos`, JSON.stringify(productos[favoritosProductos]));
     location.href = "caracteristicas.html";
 }
 
-/*ver carrito
 
-    document.getElementById(buttonCarrito).onclick =() => {
-    localStorage.setItem(`verCarrito`, JSON.stringify(carrito));
-    location.href = "carrito.html";
-}
-*/
 //favoritos
 /*
 
 
 
-function favoritosPr()*/
+function favoritosPr()
 
 const favoritos = JSON.parse(localStorage.getItem("favoritos")) ?? [];
 document.getElementById("buttonFavoritos").innerHTML = favoritos.length;
@@ -379,7 +424,7 @@ productos.forEach((productoF) => {
         console.log(favoritos)
     }
 });
-
+*/
 
 
 
@@ -407,7 +452,6 @@ productosFiltrados.forEach((producto) => {
   </div>`
 })}
 
-
 console.log(document.getElementsByClassName("filtrar-categoria"));
 
 for(const nodoHtml of document.getElementsByClassName("filtrar-categoria")){
@@ -417,36 +461,85 @@ for(const nodoHtml of document.getElementsByClassName("filtrar-categoria")){
     }
 }
 
+///////////////////////////////
 
+const contenedor = document.getElementById("contenedorProductos")
+alertUno();
 
-/*filtor pra buscar producto.
+///////////////////////////////////////
+//api de ejemplo de star wars
 
+/*
+const buscarApiMeli=() =>{
+fetch(`https://swapi.dev/api/people/`)
+.then((response) => response.json())
+.then(informacion => {
+  console.log(informacion)
 
-function buscarProducto(categoria){
-    document.getElementById("btnBuscar").innerHTML = "";
-    const productosBuscados = productos.find((producto) => producto.codigo == "btnInput");
-
-productosBuscados.forEach((producto) => {
-    const idButton = `add-cart${producto.codigo}`
-    document.getElementById("sectionVacio").innerHTML += `  <div class="card" style="width: 20rem">
+  let acumuladorSw = "";
+  informacion.results.forEach((productoSw) =>{
+    console.log(productoSw)
+    acumuladorSw += `  <div class="card" style="width: 20rem">
     <div class="precio">
-    <p>${producto.precio}</p>
+    <p>${productoSw.height}</p>
     </div>
-    <img src="${producto.img}" class="card-img-top" alt="...">
+    <img src="${productoSw.films}" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">${producto.nombre}</h5>
-      <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
+      <h5 class="card-title">${productoSw.name}</h5>
     </div>
   </div>`
-})}
+})
+document.getElementById("sectionVacio").innerHTML = acumuladorSw;
+})
+  }
 
-console.log(document.getElementsByClassName("btnBuscar"));
-buscarProducto(cables)
 
 
-    document.getElementById(btnBuscar).onclick =() => {productos.find((producto) => producto.codigo === 3445);
-        
+buscarApiMeli();
+/*
+
+/*
+ const curl =() =>{
+  fetch (`https://swapi.dev/api/people/`)
+  .then((response) => response.json())
+  .then(informacionDos => {
+    console.log(informacionDos)
+  })
+}
+curl();
+*/
+
+
+/* API POKEMON
+
+
+
+const buscarApiPoke=() =>{
+  fetch(`https://pokeapi.co/api/v2/pokemon/`)
+  .then((response) => response.json())
+  .then(informacion => {
+    console.log(informacion)
+  
+    let acumuladorPk = "";
+    informacion.results.forEach((productoPk) =>{
+      console.log(productoPk)
+      acumuladorPk += `  <div class="card" style="width: 20rem">
+      <div class="precio">
+      <p>POKEMON</p>
+      </div>
+      <img src="${productoPk.url}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${productoPk.name}</h5>
+      </div>
+    </div>`
+  })
+  document.getElementById("sectionVacio").innerHTML = acumuladorPk;
+  })
     }
-    console.log(btnBuscar)
-    */
-
+  
+  
+  
+  buscarApiPoke();
+  
+  */
+  
