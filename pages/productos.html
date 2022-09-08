@@ -19,15 +19,36 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">carrito</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="carritoAcumulador">
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="vaciarCarrito" class="btn btn-secondary" data-bs-dismiss="modal">vaciar carrito</button>
+        <button type="button" class="btn btn-primary">continuar</button>
+        <p> precio total: $Usd  <span   id="buttonPrecio">
+          0
+        </span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal 2-->
+<div class="modal fade" id="exampleModalFav" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">favoritos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="favoritosAcumulador">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="vaciarFavoritos" class="btn btn-secondary" data-bs-dismiss="modal">vaciar favoritos</button>
+        <button type="button" class="btn btn-primary">continuar</button>
       </div>
     </div>
   </div>
@@ -46,7 +67,7 @@
               <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="pages/productos.html">Productos</a>
+                    <a class="nav-link active" aria-current="page" href="../pages/productos.html">Productos</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,8 +94,11 @@
                   </li>
                 </ul>
                 <form class="d-flex" role="search" >
-                  <input  class="form-control me-2 " type="search " placeholder="Search " aria-label="Search btnInput">
+                  <input  class="form-control me-2 " type="search " placeholder="Search " aria-label="Search btnInput" id="buscador">
                   <button id="btnBuscar" class="btn btn-outline-success" type="submit">Buscar</button>
+                  <ul id="resultado">
+                   
+                  </ul>
                 </form>
               </div>
             </div>
@@ -87,7 +111,7 @@
                   <span class="visually-hidden">FacuBenitez</span>
                 </span>
               </button>
-              <button class="btn btn-outline-success me-2 position-relative" type="button">Favoritos
+              <button class="btn btn-outline-success me-2 position-relative" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalFav">Favoritos
                 <span   id="buttonFavoritos" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
                   0
                 </span>
@@ -115,8 +139,8 @@
         <h3>
             Derechos de Autor
         </h3>
-        <h4>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti tenetur possimus ad cum asperiores beatae molestias vitae suscipit cumque explicabo at odit officia voluptates nesciunt rem, rerum fuga placeat provident.
+        <h4 id="footerJ" class="footerjson">
+          
         </h4>
         <h5>
              Redes Sociales

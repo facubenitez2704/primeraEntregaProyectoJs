@@ -14,25 +14,42 @@
       
    
 </head>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">carrito</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" id="carritoAcumulador">
+        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="vaciarCarrito" class="btn btn-secondary" data-bs-dismiss="modal">vaciar carrito</button>
+        <button type="button" class="btn btn-primary">continuar</button>
+        <p> precio total: $Usd  <span   id="buttonPrecio">
+          0
+        </span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal 2-->
+<div class="modal fade" id="exampleModalFav" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">favoritos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="favoritosAcumulador">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="vaciarFavoritos" class="btn btn-secondary" data-bs-dismiss="modal">vaciar favoritos</button>
+        <button type="button" class="btn btn-primary">continuar</button>
       </div>
     </div>
   </div>
@@ -51,26 +68,7 @@
           <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="pages/productos.html">Productos</a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Categorias
-                    </a>
-                    <ul class="dropdown-menu" id="menuP">
-                      <li>
-                        <a class="dropdown-item" onclick="filtrarPorCategoria(`guitarra`)"> Guitarras </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" onclick="filtrarPorCategoria(`amplificadores`)"> Amplificadores y gabinetes </a>
-                      <li>
-                        <hr class="dropdown-divider"></li>
-                      <li>
-                        <a class="dropdown-item" onclick="filtrarPorCategoria(`pedales`)"> Pedales </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" onclick="filtrarPorCategoria(`accesorios`)"> Accesorios </a>
-                      </li>
-                    </ul>
-                  </li>
+                  
           <li class="nav-item">
             <a class="nav-link disabled">Link</a>
           </li>

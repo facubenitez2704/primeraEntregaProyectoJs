@@ -151,3 +151,16 @@ footer ul li{
     font-family: 'Times New Roman', Times, serif;
     padding: 1.5rem;
  }
+ .imgB{
+    height: 3rem;
+    width: 3rem;
+ }
+.footerjson{
+    color: #8b01adb3;
+    font-size: 2rem;
+    border-style:groove;
+    border:#8F8CB0;
+    text-align: center;
+    font-weight: bold;
+
+}

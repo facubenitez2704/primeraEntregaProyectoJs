@@ -131,7 +131,7 @@ console.log("selecciono" + eleccionUsuarioFicticia);
 
 //operador ternario
 function usuarioEleccion(){
-    eleccionUsuarioFicticia != "" ?  agregarAlCarrito(eleccionUsuarioFicticia) : alert("bueno muchas gracias de todas formas!")
+    eleccionUsuarioFicticia != "" ?  agregarAlCarrito(eleccionUsuarioFicticia) : console.log("bueno muchas gracias de todas formas!")
     console.log(eleccionUsuarioFicticia);
     }
     function agregarAlCarrito(seleccion){
@@ -263,29 +263,52 @@ console.log(section);
 
 
 const productos = [
-     { codigo: 3445, nombre:"guitarraGibson", modelo: "semihollow 335", color: "negra", año: 1997, origen: "usa", precio: "5000 usd", stock:2, img: src="../img/descarga.png",category:"guitarra" },
+     { codigo: 3445, nombre:"guitarraGibson", modelo: "semihollow 335", color: "negra", año: 1997, origen: "usa", precio: 5000, stock:2, img: src="../img/descarga.png",category:"guitarra" },
 
-     { codigo: 3446, nombre:"guitarraFender", modelo: "stratocaster custom shop", color: "azul oceano", año: 1989, origen: "usa", precio:"4700 usd", stock:1, img: src="../img/Fendercustom.jpg", category:"guitarra"},
+     { codigo: 3446, nombre:"guitarraFender", modelo: "stratocaster custom shop", color: "azul oceano", año: 1989, origen: "usa", precio: 4500 , stock:1, img: src="../img/Fendercustom.jpg", category:"guitarra"},
 
-     { codigo: 4567, nombre:"pedalReverb", marca:"strymon", modelo:"reverb big sky", efecto: "reverb", origen: "usa", precio:"450 usd", stock:3, img: "https://eddiesguitars.com/media/catalog/product/cache/1/thumbnail/1200x/17f82f742ffe127f42dca9de82fb58b1/i/m/img_6699.jpg",category:"pedales"},
+     { codigo: 4567, nombre:"pedalReverb", marca:"strymon", modelo:"reverb big sky", efecto: "reverb", origen: "usa", precio:450 , stock:3, img: "https://eddiesguitars.com/media/catalog/product/cache/1/thumbnail/1200x/17f82f742ffe127f42dca9de82fb58b1/i/m/img_6699.jpg",category:"pedales"},
 
-    { codigo: 4568, nombre:"pedalDelay", marca:"strymon", modelo:"timeline", efecto:"delay", origen: "usa", precio:"400 usd", stock: 3, img:"https://www.heavenimagenes.com/heavencommerce/bf05a8b6-ecb8-4713-82f8-c2ad017db15b/images/v2/STRYMON/1602241527296032_01_medium.jpg",category:"pedales"},
+    { codigo: 4568, nombre:"pedalDelay", marca:"strymon", modelo:"timeline", efecto:"delay", origen: "usa", precio:400 , stock: 3, img:"https://www.heavenimagenes.com/heavencommerce/bf05a8b6-ecb8-4713-82f8-c2ad017db15b/images/v2/STRYMON/1602241527296032_01_medium.jpg",category:"pedales"},
 
-    { codigo: 5678, nombre:"cables" , modelo:"flex", marca:"fender", color: "azul", origen: "usa", precio:"50 usd", stock: 2, img:"https://www.homemusic.pe/files/productos/20191231150430.jpg",category:"accesorios"},
+    { codigo: 5678, nombre:"cables" , modelo:"flex", marca:"fender", color: "azul", origen: "usa", precio:50 , stock: 2, img:"https://www.homemusic.pe/files/productos/20191231150430.jpg",category:"accesorios"},
 
-   { codigo: 6666,  nombre:"amplificador" , modelo: "mark five", marca: "mesa boogie", potencia: "25w", origen: "usa", precio: "2000 usd", stock:1, img:"https://guitars.azureedge.net/aza/user/gear/mesa-1-006.jpg?maxwidth=500",category:"amplificadores"},
+   { codigo: 6666,  nombre:"amplificador" , modelo: "mark five", marca: "mesa boogie", potencia: "25w", origen: "usa", precio: 2000 , stock:1, img:"https://guitars.azureedge.net/aza/user/gear/mesa-1-006.jpg?maxwidth=500",category:"amplificadores"},
 
 
 ];
 
 
 
-
-
-
 const carrito= JSON.parse(localStorage.getItem("carrito")) ?? [];
-document.getElementById("buttonCarrito").innerHTML = carrito.length;
+const favoritos= [];
 
+/*
+const carrito =  [];
+document.addEventListener(`DOMContentLoaded`, () =>{
+  if(localStorage.getItem("carrito")){
+    carrito = JSON.parse(localStorage.getItem("carrito"))
+    actualizarCarrito()
+  }
+})*/
+
+const contadorCarrito = document.getElementById("buttonCarrito")
+
+const contenedorCarrito = document.getElementById("carritoAcumulador")
+const contenedorFavoritos = document.getElementById("favoritosAcumulador")
+const botonVaciar = document.getElementById("vaciarCarrito")
+const botonVaciarFav = document.getElementById("vaciarFavoritos")
+const precioTotal = document.getElementById("buttonPrecio")
+
+botonVaciar.addEventListener("click", () =>{
+  carrito.length = 0
+  toastiTres()
+  actualizarCarrito()
+})
+botonVaciarFav.addEventListener("click", () =>{
+  favoritos.length = 0
+  actualizarFavoritos()
+})
 
 
 
@@ -294,21 +317,72 @@ productos.forEach((producto) => {
     document.getElementById("sectionVacio").innerHTML += ` 
      <div class="card" style="width: 20rem">
     <div class="precio">
-    <p>${producto.precio}</p>
+    <p> precio Usd: ${producto.precio}</p>
     </div>
     <img src="${producto.img}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${producto.nombre}</h5>
       <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
+      <a  class="btn btn-primary" id=${producto.codigo}>Favoritos</a>
       <a  class="btn btn-primary"  onclick = "verProductos(${producto.codigo})">Ver Prodcuto</a>
     </div>
   </div>`
+
+
+
+  const botonFavoritos = document.getElementById(`${producto.codigo}`)
+botonFavoritos.addEventListener( `click`,() =>{
+  favoritosAgr(producto.codigo)
+
+
+
+
+
+  
 })
-/*
-productos.forEach((producto) => {
-  const idButton = `add-cart${producto.codigo}`
-  const idButtonDos = `add-cart${producto.codigo}`
-  document.getElementById("sectionVacio").innerHTML += ` 
+
+})
+//favoritos
+
+// favoritos acumulador///////////////////////////////////////////////////////////////
+const actualizarFavoritos =() => {
+  favoritos.forEach((producto) => {
+    const div = document.createElement("div")
+    div.innerHTML = ` 
+     <div class="card" style="width: 20rem">
+    <div class="precio">
+    <p>${producto.precio}</p>
+    </div>
+    <img src="${producto.img}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${producto.nombre}</h5>
+      <a  class="btn btn-primary"  onclick = "eliminarCarrito (${producto.codigo})">Eliminar </a>
+  
+    </div>
+  </div>`
+  contenedorFavoritos.appendChild(div)
+  })
+  }
+
+const favoritosAgr =(prodCod) => {
+  const item = productos.find((producto) => producto.codigo === prodCod)
+  favoritos.push(item)
+  actualizarFavoritos();
+  console.log(favoritos)
+}
+
+
+// carrito acumulador///////////////////////////////////////////////////////////////
+
+
+const actualizarCarrito = () => {
+
+contenedorCarrito.innerHTML = " "
+
+carrito.forEach((producto) => {
+  const div = document.createElement("div")
+  div.className = ("productosEnCarrito")
+  div.innerHTML = ` 
    <div class="card" style="width: 20rem">
   <div class="precio">
   <p>${producto.precio}</p>
@@ -316,50 +390,81 @@ productos.forEach((producto) => {
   <img src="${producto.img}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">${producto.nombre}</h5>
-    <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
-    <a   class="btn btn-primary " id=${idButtonDos} >Favoritos</a>
-    <a  class="btn btn-primary"  onclick = "verProductos(${producto.codigo})">Ver Prodcuto</a>
-    
+    <a  class="btn btn-primary"  onclick = "eliminarCarrito(${producto.codigo})">Eliminar </a>
+
   </div>
 </div>`
+contenedorCarrito.appendChild(div)
+contadorCarrito.innerText = carrito.length
+precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.precio, 0)
 })
-*/
-productos.forEach((producto) => {
-    const idButton = `add-cart${producto.codigo}`
-    document.getElementById(idButton).onclick = () => {
-      alertTres();
-        carrito.push(producto);
-        document.getElementById("buttonCarrito").innerHTML = carrito.length
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-        console.log(carrito)
-        
-    }
-});
 
+}
+//eliminar carrito//
+const eliminarCarrito =(prodCod) => {
+  const item = carrito.find((productos) => productos.codigo === prodCod)
+  const indice = carrito.indexOf(item)
+  carrito.splice(indice, 1)
+  toastiDos()
+actualizarCarrito()
+}
+function toastiDos(){
+  Toastify({
+  text: "Tu producto fue eliminado del carrito " + "",
+  duration: 3000,
+  destination: "https://github.com/apvarun/toastify-js",
+  newWindow: true,
+  close: true,
+  gravity: "top", // `top` or `bottom`
+  position: "left", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #00b09b, #96c93d)",
+  },
+  onClick: function(){
 
+  }}
+).showToast();
+}
+
+function toastiTres(){
+  Toastify({
+  text: "Tu carrito esta vacio+" + "",
+  duration: 3000,
+  destination: "https://github.com/apvarun/toastify-js",
+  newWindow: true,
+  close: true,
+  gravity: "top", // `top` or `bottom`
+  position: "left", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #00b09b, #96c93d)",
+  },
+  onClick: function(){
+
+  }}
+).showToast();
+}
+
+/////////////////////////////////////
 productos.forEach((producto) => {
   const idButton = `add-cart${producto.codigo}`
-  document.getElementById("carritoAcumulador").innerHTML += ` 
-   <div class="card" style="width: 20rem">
-  <div class="precio">
-  <p>${producto.precio}</p>
-  </div>
-  <img src="${producto.img}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">${producto.nombre}</h5>
-    <a  class="btn btn-primary" id=${idButton}>Agegar al Carrito</a>
-    <a  class="btn btn-primary"  onclick = "verProductos(${producto.codigo})">Ver Prodcuto</a>
-  </div>
-</div>`
+  document.getElementById(idButton).onclick = () => {
+    alertTres();
+    toasti()
+    actualizarCarrito();
+      carrito.push(producto);
+      document.getElementById("buttonCarrito").innerHTML = carrito.length
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      console.log(carrito)
+      
+  }
 })
 
 
 
-
-
-
-
-Toastify({
+function toasti(){
+    Toastify({
     text: "Agregaste al carrito " + "",
     duration: 3000,
     destination: "https://github.com/apvarun/toastify-js",
@@ -375,12 +480,13 @@ Toastify({
 
     }}
   ).showToast();
+}
 
 
 // alert 3
 function alertTres(){
   Swal.fire({
-      title: "exelente elegiste" + " " + productos.nombre,
+      title: "Tu Producto a sido Agregado",
       width: 600,
       padding: '5rem',
       color: '#3606a9',
@@ -396,39 +502,13 @@ function alertTres(){
   
 
 
-// ver productos
+// ver productos/////////////////////////////////////////////////////////////
 function verProductos(codigo){
   
     const favoritosProductos = productos.findIndex((producto) => producto.codigo === codigo);
     localStorage.setItem(`verProductos`, JSON.stringify(productos[favoritosProductos]));
     location.href = "caracteristicas.html";
 }
-
-
-//favoritos
-/*
-
-
-
-function favoritosPr()
-
-const favoritos = JSON.parse(localStorage.getItem("favoritos")) ?? [];
-document.getElementById("buttonFavoritos").innerHTML = favoritos.length;
-
-productos.forEach((productoF) => {
-    const idButtonDos = `add-cart${productoF.codigo}`
-    document.getElementById(idButtonDos).onclick = () => {
-        favoritos.push(productoF);
-        document.getElementById("buttonFavoritos").innerHTML = favoritos.length
-        localStorage.setItem("favoritos", JSON.stringify(favoritos));
-        console.log(favoritos)
-    }
-});
-*/
-
-
-
-
 
 
 
@@ -462,9 +542,8 @@ for(const nodoHtml of document.getElementsByClassName("filtrar-categoria")){
 }
 
 ///////////////////////////////
-
-const contenedor = document.getElementById("contenedorProductos")
 alertUno();
+actualizarCarrito()
 
 ///////////////////////////////////////
 //api de ejemplo de star wars
@@ -510,36 +589,51 @@ curl();
 */
 
 
-/* API POKEMON
+
+
+ //fetch con json
 
 
 
 const buscarApiPoke=() =>{
-  fetch(`https://pokeapi.co/api/v2/pokemon/`)
+  fetch("../productos.json")
   .then((response) => response.json())
   .then(informacion => {
     console.log(informacion)
   
-    let acumuladorPk = "";
-    informacion.results.forEach((productoPk) =>{
-      console.log(productoPk)
-      acumuladorPk += `  <div class="card" style="width: 20rem">
-      <div class="precio">
-      <p>POKEMON</p>
-      </div>
-      <img src="${productoPk.url}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">${productoPk.name}</h5>
-      </div>
-    </div>`
-  })
-  document.getElementById("sectionVacio").innerHTML = acumuladorPk;
+    let acumuladorPk = informacion;
+  document.getElementById("footerJ").innerHTML = acumuladorPk;
   })
     }
   
   
   
   buscarApiPoke();
+
+ //buscador//
+
+ const inputBuscar = document.querySelector("#buscador");
+const buscar =document.querySelector("#btnBuscar");
+const resultadoBuscador =document.querySelector("#resultado")
+
+const filtrar = () => {
+
+  resultadoBuscador.innerHTML= "";
   
-  */
-  
+  const texto = inputBuscar.value.toLowerCase();
+  for(let producto of productos){
+    let nombre = producto.nombre.toLowerCase();
+    if(nombre.indexOf(texto) !== -1){
+      resultadoBuscador.innerHTML += `
+       <li><a href="../pages/productos.html" >
+       ${producto.nombre}
+   </a>  - valor: ${producto.precio} - <img src="${producto.img}" class="imgB" alt="..."></li>`
+    }
+  }
+  if(resultadoBuscador.innerHTML === ""){
+    resultadoBuscador.innerHTML += `<li> Producto no encontrado ..</li>
+    `
+  }
+}
+buscar.addEventListener(`click`, filtrar)
+inputBuscar.addEventListener(`keyup`,filtrar )
